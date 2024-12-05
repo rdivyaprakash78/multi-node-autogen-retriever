@@ -9,7 +9,7 @@ llm_config = {
     "config_list": [
         {
         "model": "llama-3.1-70b-versatile", 
-        "api_key": "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", 
+        "api_key": "your-api-key", 
         "api_type": "groq"
         }
     ]
