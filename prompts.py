@@ -85,8 +85,8 @@ prompts = {
     assistant (generates search term for finding Indias republic day) -> 
     admin (Fetches the search result to answer the first subquery) ->
     retriever (Fetches the search result to answer the first subquery)
-    planner (Devices instructions to find the number of days from today to Indias republic day)
-    code generator (Generates python code to find the number of days for coming India's republic day) ->
+    nerator (Generatplanner (Devices instructions to find the number of days from today to Indias republic day)
+    code gees python code to find the number of days for coming India's republic day) ->
     admin (Runs the python code to fetch the result) ->
     retriever (Retrieves the final answer).
 

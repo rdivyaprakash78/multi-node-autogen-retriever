@@ -59,7 +59,7 @@ admin = autogen.UserProxyAgent(
         "use_docker": False
     },
     human_input_mode="NEVER",
-    llm_config=llm_config
+    llm_config=False
 )
 
 #wiki fetching tool
@@ -72,8 +72,6 @@ def wiki_fetcher(search_term: Annotated[str, "wikipedia search term"], user_quer
 assistant.register_for_llm(name="wiki_fetcher", description="Wiki search engine")(wiki_fetcher)
 admin.register_for_execution(name="wiki_fetcher")(wiki_fetcher)
 
-#chat_result = admin.initiate_chat(flow_planner, message = "How many days are there for upcoming Dhoni birthday?", max_turns=1)
-#response_string = chat_result.chat_history[-1]["content"]
 counter = 0
 history = ""
 flow = []
@@ -103,12 +101,12 @@ def custom_speaker_selection_func(last_speaker: autogen.Agent, groupchat: autoge
 groupchat = autogen.GroupChat(
     agents=[flow_planner, query_splitter, planner, assistant, code_generater, retriever, admin],
     messages=[],
-    speaker_selection_method=custom_speaker_selection_func
+    # speaker_selection_method=custom_speaker_selection_func
 )
 
 manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
-user_request = "How many days since India won t20 worldcup?."
+user_request = "Compare between AMD EPYC processors and ryzen "
 message = f"user_query : {user_request}. Remember the 'user_query' throughout the conversation."
 
 chat_result = admin.initiate_chat(

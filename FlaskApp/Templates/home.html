@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="Form">
+      <form action="#" method="post" class="chatform">
+        <div class="Formnbutton">
+          <input
+            class="chatinput"
+            type="text"
+            placeholder="Enter your text here"
+            name="ques"
+          />
+          <button class="Button" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <p>{% block answer %} {% endblock %}</p>
+  </body>
+</html>

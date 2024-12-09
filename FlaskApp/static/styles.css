@@ -1,0 +1,46 @@
+/* Apply global font styling */
+body {
+  font-family: sans-serif;
+  margin: 100;
+  padding: 0;
+  background-color: white; /* Light background for a Streamlit-like look */
+  color: #333; /* Dark text color for readability */
+}
+
+.chatform {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 100px;
+  width: 500px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.125);
+}
+
+.chatinput {
+  width: 100%;
+  border: none;
+}
+
+.Formnbutton {
+  display: flex;
+}
+
+.Formnbutton :focus {
+  outline: none;
+}
+
+.Form {
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.Button {
+  background-color: #03b657;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
