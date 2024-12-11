@@ -1,3 +1,6 @@
-{% extends "home.html" %}
-
-<p>{% block answer %} {{ques}} {% endblock %}</p>
+{% extends "home.html" %} {% block answer1 %} {{ans[-1]["content"]}} {% endblock
+%} {% block answer2 %} {% for agent in ans %}
+<div><b>{{agent.name}} :</b></div>
+<div>{{agent.content}}</div>
+<br />
+{% endfor %} {% endblock %}

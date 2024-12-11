@@ -20,6 +20,13 @@
         </div>
       </form>
     </div>
-    <p>{% block answer %} {% endblock %}</p>
+    <div class="outputarea">
+      <div class="outputbox">
+        <div class="Textarea" readonly>{% block answer1 %}{% endblock %}</div>
+      </div>
+      <div class="outputbox">
+        <div class="Textarea" readonly>{% block answer2 %}{% endblock %}</div>
+      </div>
+    </div>
   </body>
 </html>

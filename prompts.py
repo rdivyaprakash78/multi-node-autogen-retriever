@@ -180,11 +180,6 @@ prompts = {
 
     Retrieves the answer for the user query for the results provided by human admin.
 
-    The format of your response should be of the following,
-
-    "
-    response : [result]
-    "
     You should not return anything else.
     """
 

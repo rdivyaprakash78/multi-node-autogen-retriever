@@ -1,5 +1,9 @@
 from flask import Flask, render_template,request, redirect, url_for, session
 
+import sys
+sys.path.append('../')
+from retriever import get_response
+
 app = Flask(__name__, template_folder= "Templates")
 app.secret_key = "project-secret-key"
 
@@ -13,14 +17,13 @@ def home():
 
 @app.route('/answer', methods=['GET', 'POST'])
 def answer():
-    prev_length = len(session["question"])
     if request.method == 'POST':
         question = request.form["ques"]
         session["question"] = question
         return redirect(url_for("answer"))
     if "question" in session:
-        ques = session["question"]
-        return render_template('answer.html', ques=ques, prev_length=prev_length)
+        answer = get_response(session["question"])
+        return render_template('answer.html', ans=answer)
         
 if __name__ == '__main__':
     app.run(debug=True)

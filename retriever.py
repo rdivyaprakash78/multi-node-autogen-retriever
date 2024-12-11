@@ -59,7 +59,7 @@ admin = autogen.UserProxyAgent(
         "use_docker": False
     },
     human_input_mode="NEVER",
-    llm_config=False
+    llm_config=llm_config
 )
 
 #wiki fetching tool
@@ -95,22 +95,23 @@ def custom_speaker_selection_func(last_speaker: autogen.Agent, groupchat: autoge
 
         return globals()[flow[counter-1]]
     else:
+        counter = 0
         return None
     
 
 groupchat = autogen.GroupChat(
     agents=[flow_planner, query_splitter, planner, assistant, code_generater, retriever, admin],
     messages=[],
-    # speaker_selection_method=custom_speaker_selection_func
+    speaker_selection_method=custom_speaker_selection_func
 )
 
 manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
-user_request = "Compare between AMD EPYC processors and ryzen "
-message = f"user_query : {user_request}. Remember the 'user_query' throughout the conversation."
-
-chat_result = admin.initiate_chat(
+def get_response(request):
+    message = f"user_query : {request}. Remember the 'user_query' throughout the conversation."
+    chat_result = admin.initiate_chat(
     manager,
-    message=message,
-)
+    message=message)
+    return chat_result.chat_history
+
 

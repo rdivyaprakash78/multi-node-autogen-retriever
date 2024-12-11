@@ -1,6 +1,6 @@
 /* Apply global font styling */
 body {
-  font-family: sans-serif;
+  font-family: "Roboto";
   margin: 100;
   padding: 0;
   background-color: white; /* Light background for a Streamlit-like look */
@@ -10,7 +10,7 @@ body {
 .chatform {
   background-color: white;
   border-radius: 5px;
-  margin-top: 100px;
+  margin-top: 40px;
   width: 500px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.125);
@@ -43,4 +43,32 @@ body {
   padding: 10px 20px;
   cursor: pointer;
   margin-left: 10px;
+}
+
+.outputarea {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.outputbox {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.Textarea {
+  resize: none;
+  width: 500px;
+  height: 300px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.125);
+  overflow-y: scroll;
+  font-size: small;
+}
+
+.Textarea:focus {
+  outline: none;
 }
