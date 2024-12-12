@@ -1,8 +1,17 @@
 import autogen
 from typing import Annotated
 from langchain_community.utilities import WikipediaAPIWrapper
+from langchain.output_parsers import PydanticOutputParser
 import regex as re
 from prompts import prompts
+from pydantic import BaseModel, Field
+from typing import List
+
+class Flow(BaseModel):
+    flow_array : list[str] = Field(Description = "List of strings which contains the name of the agents ordered according to the flow.")
+
+
+parser = PydanticOutputParser(pydantic_object= Flow)
 
 llm_config = {
     "cache_seed": None,
@@ -17,7 +26,7 @@ llm_config = {
 
 flow_planner = autogen.ConversableAgent(
     name="Flow Planner",
-    system_message=prompts["flow planner prompt"],
+    system_message=prompts["flow planner prompt"] + "\n\n" + str(parser.get_format_instructions()),
     llm_config=llm_config
 )
 
@@ -86,8 +95,10 @@ def custom_speaker_selection_func(last_speaker: autogen.Agent, groupchat: autoge
         return flow_planner
     elif len(messages) == 2:
         history = messages[-1]["content"]
-        match = re.search(r'response\s*:\s*\[(.*?)\]', history.lower())
-        flow = [item.strip().strip('"') for item in match.group(1).split(',')]
+        #match = re.search(r'response\s*:\s*\[(.*?)\]', history.lower())
+        #flow = [item.strip().strip('"') for item in match.group(1).split(',')]
+        flow = parser.parse(history.lower())
+        flow = flow.flow_array
         counter += 1
         return globals()[flow[counter-1]]
     elif counter < len(flow):
@@ -115,3 +126,5 @@ def get_response(request):
     return chat_result.chat_history
 
 
+user_input = input("user input :")
+get_response(user_input)

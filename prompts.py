@@ -5,7 +5,7 @@ prompts = {
     "flow planner prompt" :
 
     """
-    Flow Planner.
+    Flow Planner. The spelling of the agents should be as it is mentioned !!!!!!!!!!!
 
     Given a user query you need to structure a flow plan to answer the user query.
 
@@ -60,11 +60,6 @@ prompts = {
     - assistant (Returns wikipedia search terms (Factual question))
     - admin (Fetches the search result to answer the user query)
     - retriever (Retrieves the final answer).
-
-    Your response should be in the following format:
-
-    'response : ["planner", "assistant", "admin", "retriever"]' and nothing else.
-    Note : These are variable names and they should be exactly as mentioned.
     
     Example 2 : Combination of multiple categories user_query
     
@@ -89,14 +84,6 @@ prompts = {
     code gees python code to find the number of days for coming India's republic day) ->
     admin (Runs the python code to fetch the result) ->
     retriever (Retrieves the final answer).
-
-    Your response should be in the following format:
-
-    "response : ["query_splitter", "planner", "assistant", "admin", "planner", "code_generater", "admin", "retriever"]"
-    
-    and nothing else.
-
-    Note : These are variable names and they should be exactly as mentioned.
     """,
 
     "query splitter prompt" :
@@ -128,16 +115,6 @@ prompts = {
     Planner.
 
     Given a user query you should give instructions on how to answer the question.
-
-    You should device plan for only one query at a time.
-
-    The user query can be of the following categories:
-
-    1. A factual query that needs to be answered by performing a wikipedia search by calling wiki tool.
-    2. A time related query that needs to be answered by developing a python code snippet.
-    3. A general query that the LLM can answer on its own. (That doesnt fall into the above mentioned categories).
-
-    Device instructions according to the user query category type.
 
     """,
 
@@ -182,5 +159,6 @@ prompts = {
 
     You should not return anything else.
     """
+    
 
 }
