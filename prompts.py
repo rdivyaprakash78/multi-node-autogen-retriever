@@ -78,10 +78,10 @@ prompts = {
     query splitter (splits the query into 2 : When was indias republic day?, How many days are there from today to [India's republic day].
     planner  (Devices instructions to find when is Indias republic day) 
     assistant (generates search term for finding Indias republic day) -> 
-    admin (Fetches the search result to answer the first subquery) ->
+    admin (Fetches the search result to answer the first subquery. Always admin should be called after assistant if wiki search is performed.) ->
     retriever (Fetches the search result to answer the first subquery)
     nerator (Generatplanner (Devices instructions to find the number of days from today to Indias republic day)
-    code gees python code to find the number of days for coming India's republic day) ->
+    code gees python code to find the number of days for coming India's republic day. Always admin should be called after code_generater.) ->
     admin (Runs the python code to fetch the result) ->
     retriever (Retrieves the final answer).
     """,

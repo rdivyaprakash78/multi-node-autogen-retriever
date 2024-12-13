@@ -17,7 +17,7 @@ llm_config = {
     "cache_seed": None,
     "config_list": [
         {
-        "model": "llama-3.1-70b-versatile", 
+        "model": "llama-3.3-70b-versatile", 
         "api_key": "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", 
         "api_type": "groq"
         }
@@ -127,4 +127,6 @@ def get_response(request):
 
 
 user_input = input("user input :")
-get_response(user_input)
+value_ = get_response(user_input)
+
+print(value_)
