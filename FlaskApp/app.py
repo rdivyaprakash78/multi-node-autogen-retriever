@@ -1,8 +1,8 @@
-from flask import Flask, render_template,request, redirect, url_for, session
+from flask import Flask, render_template,request, redirect, url_for, session, Response
 
 import sys
 sys.path.append('../')
-from retriever import get_response
+from retrieverv2 import get_response
 
 app = Flask(__name__, template_folder= "Templates")
 app.secret_key = "project-secret-key"
@@ -22,8 +22,8 @@ def answer():
         session["question"] = question
         return redirect(url_for("answer"))
     if "question" in session:
-        answer = get_response(session["question"])
-        return render_template('answer.html', ans=answer)
+        answer = get_response(session["question"]) 
+        return render_template('answer.html', ans=answer) 
         
 if __name__ == '__main__':
     app.run(debug=True)

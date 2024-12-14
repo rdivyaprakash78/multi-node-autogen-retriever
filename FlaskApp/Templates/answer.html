@@ -1,6 +1,7 @@
 {% extends "home.html" %} {% block answer1 %} {{ans[-1]["content"]}} {% endblock
 %} {% block answer2 %} {% for agent in ans %}
 <div><b>{{agent.name}} :</b></div>
+<div>{{agent.tool_calls}}</div>
 <div>{{agent.content}}</div>
 <br />
 {% endfor %} {% endblock %}

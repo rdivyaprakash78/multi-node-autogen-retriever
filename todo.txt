@@ -1,0 +1,6 @@
+- Remove planner at the start of each subquery. Instead add one planner at the start of the initial flow.
+Tweak the propnt of planner as needed.
+
+- Make changes to UI. Add two buttons one for retrieverv1 and one for retrieverv2. (refer design)
+
+- Try to implement a regenerate button (not priority).
