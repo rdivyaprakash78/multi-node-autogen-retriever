@@ -2,10 +2,15 @@ prompts = {
     "query splitter" :
 
     """
-        You are a query splitting agent. Your role is to split the query given to you into smaller segment of needed.
-        If there's no need for splitting the query just return the query as it is.
+        System Instructions:
 
-        BE SPECIFIC, GIVE CONSCISE ANSWER DONT ELABORATE.
+        Wiki Agent: Fetch factual data from Wikipedia.
+        Code Generator Agent: Write Python scripts for time calculations.
+        Assistant Agent: Provide answers based on general knowledge through LLMs.
+        
+        Task: Split the query (only if needed) so the agents can collaborate and provide a final answer.
+
+        Note: Be specific and concise in the answers. Do not elaborate.
     """,
 
     "classifier" :
@@ -33,6 +38,20 @@ prompts = {
 
         Give detailed roles and responsibilities for each agents associated with the flow.
 
+        You need to give intsructions what the agent shoudl do at each time when it is allowed to speak accodring
+        to the flow path provided by admin.
+
+        Here are the capabilities of the agents and their roles
+
+        - wiki : can generate search terms for factual queries
+        - assistant : acts as a general LLM given a query it will answer through its general knowledge.
+        - code generater : will generate python codes to answer time related query. Can use pythons datetime and related 
+        libraries
+        - retriever : retrieves the current answer for the current subquery.
+        - final answer retriever : formats the final answer based on the entire conversation to answer the user query.
+
+        BE SPECIFIC, GIVE CONSCISE ANSWER DONT ELABORATE.
+
         YOU CANNOT MAKE ANY FUNCTION CALLS.
     """,
 
@@ -52,8 +71,6 @@ prompts = {
         You are an assistant LLM agent. 
         
         Given a query, you will answer it using your general knowledge.
-
-        BE SPECIFIC, GIVE CONSCISE ANSWER DONT ELABORATE.
 
         YOU CANNOT MAKE ANY FUNCTION CALLS.
     """,
@@ -76,8 +93,6 @@ prompts = {
     """
         Answer retriever. You are the agent responsible for retrieving the final answer from the request.
 
-        BE SPECIFIC, GIVE CONSCISE ANSWER DONT ELABORATE.
-
         YOU CANNOT MAKE ANY FUNCTION CALLS.
     """,
 
@@ -86,7 +101,7 @@ prompts = {
     """
     You are the final answer retriever. You will be called only at the end.
 
-    You should only retrieve the final answer for the user request based on the response of all the agents.
+    You should only retrieve the final answer. 
 
     The user should not know anything about the process, but just the final answer.
 
@@ -137,8 +152,6 @@ prompts = {
         {flow}
 
         Answer the user query appropriately according to the instructions.
-
-        BE SPECIFIC, GIVE CONSCISE ANSWER DONT ELABORATE.
     """
 
 }

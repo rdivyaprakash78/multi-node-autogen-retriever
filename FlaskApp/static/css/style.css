@@ -1,16 +1,16 @@
 /* Apply global font styling */
 body {
   font-family: "Roboto";
-  margin: 100;
+  margin: 0;
   padding: 0;
   background-color: white; /* Light background for a Streamlit-like look */
   color: #333; /* Dark text color for readability */
 }
 
 .chatform {
+  margin-top: 20px;
   background-color: white;
   border-radius: 5px;
-  margin-top: 40px;
   width: 500px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.125);
@@ -40,13 +40,15 @@ body {
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
   cursor: pointer;
   margin-left: 10px;
+  width: 100px;
+  height: 45px;
 }
 
 .outputarea {
   margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
 }
@@ -85,4 +87,38 @@ body {
 
 .Textarea:focus {
   outline: none;
+}
+
+#inputArea {
+  height: 100px;
+  width: 600px;
+  resize: none;
+  overflow-y: auto;
+  font-family: "Inter", sans-serif;
+}
+
+#Buttons {
+  text-align: right;
+}
+
+#heading {
+  text-align: center;
+  background-color: #03b657;
+  color: white;
+  height: 50px;
+  padding-top: 20px;
+  margin: 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.125);
+}
+
+#submitButton {
+  margin-bottom: 15px;
+}
+
+#submitButton:hover {
+  font-weight: bold;
+}
+
+#recordButton:hover {
+  font-weight: bold;
 }

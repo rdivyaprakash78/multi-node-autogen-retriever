@@ -3,32 +3,42 @@
   <head>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
+      href="{{ url_for('static', filename='css/style.css') }}"
     />
   </head>
   <body>
+    <h1 id="heading">Multi-Agent Assistant</h1>
     <div class="Form">
-      <form action="#" method="post" class="chatform">
+      <form action="#" class="chatform">
         <div class="Formnbutton">
-          <input
+          <textarea
+            id="inputArea"
             class="chatinput"
             type="text"
             placeholder="Enter your text here"
             name="ques"
-          />
-          <button class="Button" type="submit">Submit</button>
+          ></textarea>
+          <div id="Buttons">
+            <button class="Button" type="submit" id="submitButton">
+              Submit
+            </button>
+            <button class="Button" id="recordButton">Record</button>
+          </div>
         </div>
       </form>
     </div>
     <div class="outputarea">
       <div class="outputbox">
-        <div class="Textarea" readonly>{% block answer1 %}{% endblock %}</div>
+        <div id="finalAnswer" class="Textarea" readonly>
+          {% block answer1 %}{% endblock %}
+        </div>
       </div>
       <div class="outputbox">
-        <div class="Consolearea" readonly>
+        <div id="console" class="Consolearea" readonly>
           {% block answer2 %}{% endblock %}
         </div>
       </div>
     </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>

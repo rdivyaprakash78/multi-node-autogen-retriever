@@ -3,7 +3,7 @@
 import autogen
 from promtpsv2 import prompts
 from pydantic import BaseModel, Field
-from typing import Literal, Dict, Annotated
+from typing import Literal, Dict, Annotated, List
 from langchain.output_parsers import PydanticOutputParser
 from langchain_community.utilities import WikipediaAPIWrapper
 
@@ -13,13 +13,13 @@ llm_config = {
     "cache_seed": None,
     "config_list": [
         {
-        "model": "llama-3.3-70b-versatile", 
-        "api_key": "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", 
+        "model": "llama-3.1-8b-instant", 
+        "api_key": "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", 
         "api_type": "groq"
         }
-    ]
-}
+    ],
 
+}
 
 def get_response(user_input):
 
@@ -31,11 +31,12 @@ def get_response(user_input):
         llm_config= llm_config
     )
 
+    class subquery(BaseModel):
+        subquery: str = Field(description= "Subquery")
+        category: Literal["wiki", "time", "general"] = Field(description= "Category of the subquery")
+
     class queries(BaseModel):
-        query_category_pair: Dict[str, str] = Field(
-            default={},
-            description="A dictionary that maps query strings (keys) to category strings (values)."
-        )
+        queries : List[subquery] = Field(description="List of subquery object. Each object contains the subquery and the corresponding category")
 
     parser = PydanticOutputParser(pydantic_object= queries)
 
@@ -80,8 +81,12 @@ def get_response(user_input):
     message = prompts["system message"].format(query = user_input)
     chat_result1 = admin.initiate_chat(manager1, message=message)
     query_and_category_before_parsing = chat_result1.chat_history[-1]["content"]
-    query_and_category = parser.parse(query_and_category_before_parsing.lower())
-    result = query_and_category.query_category_pair
+    try:
+        query_and_category = parser.parse(query_and_category_before_parsing.lower())
+    except Exception as e:
+        return "Parsing error please try again"
+    
+    result = query_and_category.queries
 
     flows = {
         "wiki" : ["wiki", "admin", "retriever"],
@@ -91,13 +96,17 @@ def get_response(user_input):
     
     path = []
 
+    print(result)
 
-    for category in result.values():
-        path.append(flows[category])
+    path = [item.category for item in result]
 
-    path = [agent for flow in path for agent in flow]
+    flow = []
+    for agent in path:
+        flow.append(flows[agent])
 
-    print("path : ", path)
+    print("path : ", flow)
+    flow = [item for sublist in flow for item in sublist]
+    print("path : ", flow)
 
 
     # Final group chat agents
@@ -156,7 +165,7 @@ def get_response(user_input):
     }
     
     final_path = []
-    for i in path:
+    for i in flow:
         final_path.append(path_def[i])
 
     final_path.append(final_retriever)
