@@ -79,7 +79,11 @@ def get_response(user_input):
     manager1 = autogen.GroupChatManager(groupchat=groupchat1, llm_config=llm_config)
 
     message = prompts["system message"].format(query = user_input)
-    chat_result1 = admin.initiate_chat(manager1, message=message)
+    try :
+        chat_result1 = admin.initiate_chat(manager1, message=message)
+    except Exception as e:
+        return "Failed to initiate function call. Try again."
+    
     query_and_category_before_parsing = chat_result1.chat_history[-1]["content"]
     try:
         query_and_category = parser.parse(query_and_category_before_parsing.lower())
@@ -192,8 +196,10 @@ def get_response(user_input):
     )
 
     manager2 = autogen.GroupChatManager(groupchat=groupchat2, llm_config=llm_config)
-    chat_result2 = admin.initiate_chat(manager2, message=prompts["final system message"].format(query_dict=result, flow=path))
-
+    try :
+        chat_result2 = admin.initiate_chat(manager2, message=prompts["final system message"].format(query_dict=result, flow=path))
+    except Exception as e:
+        return "Failed to initiate function call. Try again."
     final_chat_history = list(chat_result1.chat_history) + list(chat_result2.chat_history)
 
     return final_chat_history
